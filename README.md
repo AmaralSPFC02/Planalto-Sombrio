@@ -12,7 +12,7 @@ O jogador deve proteger o “planalto” — uma estrutura central com 6 vidas �
 - Ao concluir a terceira onda, surge uma **tela de vitória**.
 
 ### ✔️ Defensores
-O jogador começa com um defensor básico que atira garrafas automaticamente.  
+O jogador começa com um defensor básico, um mendigo, que atira garrafas automaticamente.  
 Durante o jogo, é possível desbloquear mais dois personagens:
 
 - **Influencer** – atira tigrinhos estilizados  
