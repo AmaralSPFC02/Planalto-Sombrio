@@ -25,6 +25,11 @@ public class TorreDetect : MonoBehaviour
             TomarDano(1);
             Destroy(other.transform.parent.gameObject);
         }
+        if (other.CompareTag("Boss"))
+        {
+            TomarDano(5);
+            Destroy(other.transform.parent.gameObject);
+        }
     }
 
     void TomarDano(int dano)

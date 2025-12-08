@@ -19,7 +19,7 @@ public class TorreManager : MonoBehaviour
     [SerializeField] private float multiplicadorCusto = 1.5f;
     [SerializeField] private float reducaoPercentual = 0.8f;
     [SerializeField] private float cooldownMinimo = 0.5f;
-    [SerializeField] private float tempoCooldownClique = 5f;
+    [SerializeField] private float tempoCooldownClique = 1f;
     [SerializeField] private Cooldown barraCooldown;
     private int nivelUpgrade = 0;
     private int nivelDouble = 0;
@@ -98,7 +98,7 @@ public class TorreManager : MonoBehaviour
     }
 
     void OnClique(InputValue value)
-    {
+    {   
         if (barraCooldown.EmCooldown())
         {
             return;
@@ -110,7 +110,7 @@ public class TorreManager : MonoBehaviour
 
         if (hit.collider != null && hit.collider.tag.StartsWith("X"))
         {
-            AudioSource.PlayClipAtPoint(soundEffectClique, Camera.main.transform.position);
+            AudioSource.PlayClipAtPoint(soundEffectClique, Camera.main.transform.position, 0.5f);
             MovInimigo inimigo = hit.collider.GetComponentInParent<MovInimigo>();
             inimigo.DanoTouch(hitEffectPrefab);
             barraCooldown.IniciarCooldown(tempoCooldownClique);

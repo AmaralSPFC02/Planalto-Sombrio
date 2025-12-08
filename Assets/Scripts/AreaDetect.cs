@@ -11,7 +11,7 @@ public class AreaDetect : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag.StartsWith("X") && Time.time >= nextSpawnTime)
+        if ((other.tag.StartsWith("X") || other.CompareTag("Boss")) && Time.time >= nextSpawnTime)
         {
             Transform alvoMaisProximo = GetAlvoMaisProximo();
 
@@ -30,7 +30,7 @@ public class AreaDetect : MonoBehaviour
 
         foreach (var collider in colliders)
         {
-            if (collider.tag.StartsWith("X"))
+            if (collider.tag.StartsWith("X") || collider.CompareTag("Boss"))
             {
                 float distancia = Vector2.Distance(transform.position, collider.transform.position);
                 if (distancia < distanciaMinima)

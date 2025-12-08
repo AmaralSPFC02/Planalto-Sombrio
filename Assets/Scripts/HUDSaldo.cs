@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class HUDSaldo : MonoBehaviour
 {
+    public TextMeshProUGUI textoMortos;
     public TextMeshProUGUI saldoText;
     public TextMeshProUGUI precoCooldown;
     public TextMeshProUGUI precoDouble;
@@ -50,5 +51,29 @@ public class HUDSaldo : MonoBehaviour
     public void AtualizarPrecoDouble(int novoValor)
     {
         precoDouble.text = "R$ " + novoValor;
+    }
+    
+    public void AtualizarTextoMortos(int? onda = null)
+    {
+        string linhaOnda;
+
+        if (onda == null)
+        {
+            // ➜ Mantém a linha da onda existente
+            string[] linhas = textoMortos.text.Split('\n');
+
+            // Caso o texto exista e tenha a linha da onda
+            if (linhas.Length > 0)
+                linhaOnda = linhas[0];
+            else
+                linhaOnda = "Onda 1"; // fallback
+        }
+        else
+        {
+            linhaOnda = $"Onda {onda}";
+        }
+
+        // Atualiza o texto final
+        textoMortos.text = $"{linhaOnda}\nMortos: {GlobalStats.TotalKills}";
     }
 }

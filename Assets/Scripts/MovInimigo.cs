@@ -1,22 +1,25 @@
-using System.Net.Mail;
 using UnityEngine;
+using TMPro;
 
 public class MovInimigo : MonoBehaviour
 {
+    private HUDSaldo hudSaldo;
     [SerializeField] float forca = 5f;
     [SerializeField] int hp = 1;
     [SerializeField] GameObject dinheiroPrefab;
     private Rigidbody2D _rb;
-    Vector2 direcao;
     private Transform alvo;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        GameObject saldoObj = GameObject.FindGameObjectWithTag("HUD");
+        hudSaldo = saldoObj.GetComponent<HUDSaldo>();
     }
 
     public void AceleraInimigo(Transform alvo)
     {
+        this.alvo = alvo;
         Vector2 direcao = (alvo.position - transform.position).normalized;
         _rb.AddForce(direcao * forca, ForceMode2D.Impulse);
     }
@@ -33,22 +36,9 @@ public class MovInimigo : MonoBehaviour
                 Transform hpFull = transform.Find("HPFull");
                 hpFull.gameObject.SetActive(false);
             }
-
             else if (hp <= 0)
             {
-                GameObject dinheiro = Instantiate(dinheiroPrefab, transform.position, Quaternion.identity);
-                SpawnReal spawnReal = dinheiro.GetComponent<SpawnReal>();
-
-                if (CompareTag("X"))
-                {
-                    spawnReal.Spawn2Reais();
-                }
-                else if (CompareTag("X1"))
-                {
-                    spawnReal.Spawn5Reais();
-                }
-
-                Destroy(transform.root.gameObject);
+                Morrer();
             }
         }
     }
@@ -56,9 +46,9 @@ public class MovInimigo : MonoBehaviour
     public void DanoTouch(GameObject efeito)
     {
         GameObject effect = Instantiate(efeito, transform.position, Quaternion.identity, transform);
-        
-        Animator anim = effect.GetComponent<Animator>();
         Destroy(effect, 0.3f);
+
+        Animator anim = effect.GetComponent<Animator>();
 
         if (hp == 1)
         {
@@ -68,16 +58,24 @@ public class MovInimigo : MonoBehaviour
         }
         else if (hp <= 0)
         {
-            GameObject dinheiro = Instantiate(dinheiroPrefab, transform.position, Quaternion.identity);
-            SpawnReal spawnReal = dinheiro.GetComponent<SpawnReal>();
-
-            Destroy(transform.root.gameObject, 0.1f);
-
-            if (CompareTag("X"))
-                spawnReal.Spawn2Reais();
-            else if (CompareTag("X1"))
-                spawnReal.Spawn5Reais();
+            Morrer();
         }
     }
 
+    private void Morrer()
+    {
+        GlobalStats.TotalKills++;
+        hudSaldo.AtualizarTextoMortos();
+
+        GameObject dinheiro = Instantiate(dinheiroPrefab, transform.position, Quaternion.identity);
+        SpawnReal spawnReal = dinheiro.GetComponent<SpawnReal>();
+
+        if (CompareTag("X"))
+            spawnReal.Spawn2Reais();
+        else if (CompareTag("X1"))
+            spawnReal.Spawn5Reais();
+
+        // Destroi o inimigo
+        Destroy(transform.root.gameObject, 0.1f);
+    }
 }

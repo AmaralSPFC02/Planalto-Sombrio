@@ -8,6 +8,7 @@ TagManager:
   - HUD
   - X1
   - Atirador
+  - Boss
   layers:
   - Default
   - TransparentFX

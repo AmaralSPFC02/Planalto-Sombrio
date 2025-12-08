@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9420ce75b2d4e4d49aa4c325a7dff7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovInimigo
+  texto: {fileID: 0}
   forca: 1
   hp: 1
   dinheiroPrefab: {fileID: 334902278411893709, guid: c9b13d2a4a8e053448a96093ba2b5466, type: 3}
