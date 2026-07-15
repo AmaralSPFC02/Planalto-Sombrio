@@ -68,7 +68,4 @@ Assets/Scenes/MainScene.unity
 
 ## 👥 Autores
 - Gabriel Santos do Amaral — 2022007164@unifei.edu.br  
-- Iago Martins Silva — 2022008090@unifei.edu.br  
-
-1. Baixe o arquivo:
-
+- Iago Martins Silva — 2022008090@unifei.edu.br
